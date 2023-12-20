@@ -1,0 +1,11 @@
+#!/bin/bash
+
+while true; do
+    # Check if there are any unmet dependencies
+    if sudo apt-get check 2>&1 | grep -q 'You might want to run'; then
+        # Attempt to fix broken dependencies
+        sudo apt-get install -f
+    fi
+    # Sleep for a while before checking again
+    sleep 60
+done
