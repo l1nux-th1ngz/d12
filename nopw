@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Check if the script is being run as root
+if [ "$EUID" -ne 0 ]; then
+    echo "Please run this script as root or using sudo."
+    exit 1
+fi
+
+# Add entries to sudoers file
+echo "%admin ALL=(ALL:ALL) NOPASSWD: /usr/bin/apt-get update, /usr/bin/apt-get upgrade, /usr/bin/apt-get dist-upgrade, /usr/bin/apt-get install, /usr/bin/apt-get remove" >> /etc/sudoers
+
+echo "Configuration completed. Now you can update, upgrade, install, and remove packages without entering a password."
+
+# Optionally, you may choose to restart the sudo service to apply changes immediately
+# service sudo restart
